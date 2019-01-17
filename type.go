@@ -29,7 +29,7 @@ func (t Type) IsVoid() bool {
 
 // IsDebugProc indicates whether this type is a debug callback function pointer.
 func (t Type) IsDebugProc() bool {
-	return t.Name == "GLDEBUGPROC" || t.Name == "GLDEBUGPROCARB" || t.Name == "GLDEBUGPROCKHR"
+	return false
 }
 
 // CType returns the C definition of the type.
@@ -111,7 +111,7 @@ func (t Type) GoType() string {
 		return t.pointers() + "uintptr"
 	case "GLDEBUGPROC", "GLDEBUGPROCARB", "GLDEBUGPROCKHR":
 		// Special case mapping to the type defined in debug.tmpl
-		return "DebugProc"
+		return "unsafe.Pointer"
 	}
 	return "unsafe.Pointer"
 }
