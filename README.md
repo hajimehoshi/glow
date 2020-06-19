@@ -7,21 +7,31 @@ Features:
 - Go functions that mirror the C specification using Go types.
 - Support for multiple OpenGL APIs (GL/GLES/EGL/WGL/GLX/EGL), versions, and profiles.
 - Support for extensions (including debug callbacks).
+- Support for overloads to provide Go functions with different parameter signatures.
 
-See the [open issues](https://github.com/go-gl/glow/issues) for caveats about the current state of the implementation.
+See the [open issues](https://github.com/neclepsio/glow/issues) for caveats about the current state of the implementation.
 
 Generated Packages
 ------------------
 
-Generated OpenGL binding packages are available in the [go-gl/gl](https://github.com/go-gl/gl) repository.
+Generated OpenGL binding packages are available in the [go-gl/gl](https://github.com/neclepsio/gl) repository.
+
+Overloads
+---------
+
+See subdirectory `xml/overload` for examples. The motivation here is to provide Go functions with different parameter signatures of existing OpenGL functions.
+
+For example, `glVertexAttribPointer(..., void *)` cannot be used with `gl.VertexAttribPointer(..., unsafe.Pointer)` when using arbitrary offset values. The `checkptr` safeguard will abort the program when doing so.
+Overloads allow the creation of an additional `gl.VertexAttribPointerWithOffset(..., uintptr)`, which calls the original OpenGL function with appropriate casts.   
+
 
 Custom Packages
 ---------------
 
 If the prebuilt, go-gettable packages are not suitable for your needs you can build your own. For example,
 
-    go get github.com/go-gl/glow
-    cd $GOPATH/src/github.com/go-gl/glow
+    go get github.com/neclepsio/glow
+    cd $GOPATH/src/github.com/neclepsio/glow
     go build
     ./glow download
     ./glow generate -api=gl -version=3.3 -profile=core -remext=GL_ARB_cl_event

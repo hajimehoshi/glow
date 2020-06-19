@@ -36,7 +36,7 @@ type PackageFunction struct {
 func (f *PackageFunction) Comment() string {
 	var lines []string
 	if f.Doc != "" {
-		lines = append(lines, "// " + f.Doc)
+		lines = append(lines, "// "+f.Doc)
 	}
 
 	// Adds explanations about C types that are unsafe.Pointer in Go world.
@@ -181,6 +181,10 @@ func importPathToDir(importPath string) string {
 	pkgs, err := packages.Load(nil, importPath)
 	if err != nil {
 		log.Fatalln(err)
+	}
+	if len(pkgs[0].GoFiles) == 0 {
+		exe, _ := os.Executable()
+		return filepath.Dir(exe)
 	}
 	return filepath.Dir(pkgs[0].GoFiles[0])
 }
