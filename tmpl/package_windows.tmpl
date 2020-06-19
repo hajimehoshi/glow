@@ -38,6 +38,18 @@ func {{.GoName}}({{template "paramsGoDecl" .Parameters}}){{if not .Return.IsVoid
 	return {{.Return.ConvertUintptrToGo "ret"}}
 	{{end}}
 }
+{{range .Overloads}}
+
+func {{.OverloadName}}({{template "paramsGoDecl" .Parameters}}){{if not .Return.IsVoid}} {{.Return.GoType}}{{end}} {
+	{{if not .IsImplementedForSyscall}}panic("\"{{.GoName}}\" is not implemented")
+	{{else if .Return.IsVoid}}{{.Syscall}}
+	{{else}}
+	ret, _, _ := {{.Syscall}}
+	return {{.Return.ConvertUintptrToGo "ret"}}
+	{{end}}
+}
+{{end}}
+
 {{end}}
 
 // InitWithProcAddrFunc intializes the package using the specified OpenGL

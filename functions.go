@@ -22,6 +22,24 @@ type Overload struct {
 	Return       Type
 }
 
+func (o Overload) function() Function {
+	return Function{
+		GoName:     o.GoName,
+		Parameters: o.Parameters,
+		Return:     o.Return,
+	}
+}
+
+// IsImplementedForSyscall reports whether the function is implemented for syscall or not.
+func (o Overload) IsImplementedForSyscall() bool {
+	return o.function().IsImplementedForSyscall()
+}
+
+// Syscall returns a syscall expression for Windows.
+func (o Overload) Syscall() string {
+	return o.function().Syscall()
+}
+
 // IsImplementedForSyscall reports whether the function is implemented for syscall or not.
 func (f Function) IsImplementedForSyscall() bool {
 	// TODO: Use syscall.Syscall18 when Go 1.12 is the minimum supported version.
