@@ -42,11 +42,7 @@ func (o Overload) Syscall() string {
 
 // IsImplementedForSyscall reports whether the function is implemented for syscall or not.
 func (f Function) IsImplementedForSyscall() bool {
-	// TODO: Use syscall.Syscall18 when Go 1.12 is the minimum supported version.
-	if len(f.Parameters) > 15 {
-		return false
-	}
-	return true
+	return len(f.Parameters) <= 18
 }
 
 // Syscall returns a syscall expression for Windows.
