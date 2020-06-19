@@ -9,12 +9,12 @@ Features:
 - Support for extensions (including debug callbacks).
 - Support for overloads to provide Go functions with different parameter signatures.
 
-See the [open issues](https://github.com/go-gl/glow/issues) for caveats about the current state of the implementation.
+See the [open issues](https://github.com/neclepsio/glow/issues) for caveats about the current state of the implementation.
 
 Generated Packages
 ------------------
 
-Generated OpenGL binding packages are available in the [go-gl/gl](https://github.com/go-gl/gl) repository.
+Generated OpenGL binding packages are available in the [go-gl/gl](https://github.com/neclepsio/gl) repository.
 
 Overloads
 ---------
@@ -30,8 +30,8 @@ Custom Packages
 
 If the prebuilt, go-gettable packages are not suitable for your needs you can build your own. For example,
 
-    go get github.com/go-gl/glow
-    cd $GOPATH/src/github.com/go-gl/glow
+    go get github.com/neclepsio/glow
+    cd $GOPATH/src/github.com/neclepsio/glow
     go build
     ./glow download
     ./glow generate -api=gl -version=3.3 -profile=core -remext=GL_ARB_cl_event

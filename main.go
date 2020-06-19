@@ -15,7 +15,7 @@ import (
 
 func generate(name string, args []string) {
 	flags := flag.NewFlagSet(name, flag.ExitOnError)
-	dir := importPathToDir("github.com/go-gl/glow")
+	dir := importPathToDir("github.com/neclepsio/glow")
 	var (
 		xmlDir      = flags.String("xml", filepath.Join(dir, "xml"), "XML directory")
 		tmplDir     = flags.String("tmpl", filepath.Join(dir, "tmpl"), "Template directory")

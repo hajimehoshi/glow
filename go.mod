@@ -1,4 +1,4 @@
-module github.com/go-gl/glow
+module github.com/neclepsio/glow
 
 go 1.12
 
